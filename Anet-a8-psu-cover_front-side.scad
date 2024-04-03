@@ -1,55 +1,158 @@
+include <threads-scad/threads.scad> 
 
+$fn = $preview ? 32 : 64;
 
-include <Hex-Grid.scad>
-
-difference()
+translate([ 0, -40, 0 ])
 {
-	// solids
-	union()
+
+	difference()
 	{
-
-		// Borders
-		// top
-		translate([ -18, 73, 0 ])
+		// solids
+		union()
 		{
 
-			cube([ 36, 7, 2 ]);
+			// Borders
+			// top
+			translate([ -18, 73, 0 ])
+			{
+
+				cube([ 36, 7, 2 ]);
+			}
+			// bottom
+			translate([ -18, 0, 0 ])
+			{
+
+				cube([ 36, 7, 2 ]);
+			}
+			// side L
+			translate([ -25, 0, 0 ])
+			{
+
+				cube([ 7, 80, 2 ]);
+			}
+			// side R
+
+			translate([ 18, 0, 0 ])
+			{
+
+				cube([ 5, 80, 2 ]);
+
+				translate([ 5, 16.1, 0 ])
+				{
+					cube([ 2, 15.8, 2 ]);
+				}
+				translate([ 5, 48.1, 0 ])
+				{
+
+					cube([ 2, 15.8, 2 ]);
+				}
+			}
+
+			// nutholder
+			translate([ 19, 36.5, 2 ])
+			{
+
+				difference()
+				{
+					union()
+					{
+
+						cube(size = [ 4, 7, 3.5 ]);
+
+						translate([ 0, 3.5, 3.5 ])
+						{
+							rotate([ 0, 90, 0 ])
+
+							{
+
+								cylinder(h = 4, d = 7, center = false);
+							}
+						}
+					}
+
+					translate([ 2, 3.5, 3.5 ])
+					{
+						rotate([ 0, 90, 0 ])
+						{
+							cylinder(h = 6, d = 3.2, center = true);
+
+							translate([ 0, 0, -4.0 ])
+							{
+								cylinder(h = 6, d = 5, center = true);
+							}
+						}
+					}
+				}
+			}
+
+			// nutholder 2
+			translate([ -25, 50, 2 ])
+			{
+
+				difference()
+				{
+					union()
+					{
+
+						cube(size = [ 4, 7, 3.5 ]);
+
+						translate([ 0, 3.5, 3.5 ])
+						{
+							rotate([ 0, 90, 0 ])
+
+							{
+
+								cylinder(h = 4, d = 7, center = false);
+
+							}
+						}
+					}
+
+					translate([ 2, 3.5, 3.5 ])
+					{
+						rotate([ 0, 90, 0 ])
+						{
+							cylinder(h = 6, d = 3.2, center = true);
+																						translate([ 0, 0, 4.0 ])
+							{
+								cylinder(h = 6, d = 5, center = true);
+							}
+						}
+					}
+				}
+			}
 		}
-		// bottom
-		translate([ -18, 0, 0 ])
+		// holes
+		union()
 		{
+			// Nut
+			translate([ -22, 53.5, 5.5 ])
+			{
+				rotate([ 0, 90, 0 ])
+				{
+					color("blue")
+					{
+						MetricNut(3, thickness = 2);
+					}
+				}
+			}
+			// Nut
+			translate([ 18, 40, 5.5 ])
+			{
+				rotate([ 0, 90, 0 ])
+				{
+					color("blue")
+					{
+						MetricNut(3, thickness = 2);
+					}
+				}
+			}
 
-			cube([ 36, 7, 2 ]);
+			translate([ 0, 40, 2 ])
+			{
+
+				cube([ 37, 67, 3 ], center = true);
+			}
 		}
-		// side L
-		translate([ -25, 0, 0 ])
-		{
-
-			cube([ 7, 80, 2 ]);
-		}
-		// side R
-
-		translate([ 18, 0, 0 ])
-		{
-
-			cube([ 5, 80, 2 ]);
-		}
-
-	// grid
-		translate([ 0, 40, 0.75 ])
-		{
-
-			create_grid(size = [ 38, 66, 1.5 ], SW = 10, cellwall = 1.2, wall = 2);
-		}
-	// nutholder ??
-
-
-
-
-
-	}
-	// holes
-	union()
-	{
-	}
+	} // end Diff
 }
